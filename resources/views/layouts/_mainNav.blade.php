@@ -57,23 +57,23 @@
                         </div>
                     </ul>
                 </li>
-                <!--Products's-->
+                <!--Settings's-->
 
                 <li  class="has-sub" >
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#product"
-                       aria-expanded="false" aria-controls="product">
+                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#settings"
+                       aria-expanded="false" aria-controls="settings">
                         <i class="mdi mdi-chart-pie"></i>
-                        <span class="nav-text">Products</span> <b class="caret"></b>
+                        <span class="nav-text">Settings</span> <b class="caret"></b>
                     </a>
-                    <ul  class="collapse"  id="product"
+                    <ul  class="collapse"  id="settings"
                          data-parent="#sidebar-menu">
                         <div class="sub-menu">
 
 
 
                             <li >
-                                <a class="sidenav-item-link" href="#">
-                                    <span class="nav-text">Data</span>
+                                <a class="sidenav-item-link" href="{{route('category.index')}}">
+                                    <span class="nav-text">Category</span>
 
                                 </a>
                             </li>
