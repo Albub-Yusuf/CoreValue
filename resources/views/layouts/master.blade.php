@@ -81,6 +81,8 @@
 
 
 @include('layouts._scripts')
+@stack('library-js')
+
 
 
 
