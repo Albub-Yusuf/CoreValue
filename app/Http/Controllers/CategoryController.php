@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,6 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data['title'] = 'Categroy List';
+        $data['categories'] = Category::paginate(5);
         return view('admin.category.index',$data);
     }
 
@@ -25,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data['title'] = 'Create Category';
+        return view('admin.category.create',$data);
     }
 
     /**
@@ -36,7 +39,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+
+        $category_data = $request->except('_token');
+        $category_data['created_by'] = 1;
+        $category_data['updated_by'] = 0;
+
+        Category::create($category_data);
+        //session()->flash('message','Category Created Successfully.');
+
+        $notification = array(
+            'message' => 'Category created successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('category.index')->with($notification);
     }
 
     /**

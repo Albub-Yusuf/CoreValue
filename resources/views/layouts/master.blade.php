@@ -29,6 +29,11 @@
     <!-- FAVICON -->
     <link href="{{ asset('Backend/assets/img/favicon.png')}}" rel="shortcut icon" />
 
+    <!--Toaster-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+
     <!--
       HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     -->
@@ -66,8 +71,12 @@
         </header>
 
 
+
         <div class="content-wrapper">
             <div class="content">
+
+                @include('layouts._messages')
+
                 @yield('mainContent')
             </div>
         </div>

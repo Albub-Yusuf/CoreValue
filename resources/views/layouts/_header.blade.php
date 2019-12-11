@@ -10,23 +10,14 @@
 
 **/
 @endphp
-<nav class="navbar navbar-static-top navbar-expand-lg">
+<nav class="navbar navbar-static-top navbar-expand-sm">
     <!-- Sidebar toggle button -->
     <button id="sidebar-toggler" class="sidebar-toggle">
         <span class="sr-only">Toggle navigation</span>
     </button>
     <!-- search form -->
-    <div class="search-form d-none d-lg-inline-block">
-        <div class="input-group">
-            <button type="button" name="search" id="search-btn" class="btn btn-flat">
-                <i style="color:#1b4b72;" class="mdi mdi-magnify"></i>
-            </button>
-            <input type="text" name="query" id="search-input" class="form-control" placeholder="'search bar', 'chart' etc."
-                   autofocus autocomplete="off" />
-        </div>
-        <div id="search-results-container">
-            <ul id="search-results"></ul>
-        </div>
+    <div class="col-sm-6 search-form d-none d-sm-inline-block">
+        @yield('searchContent')
     </div>
 
     <div class="navbar-right ">
