@@ -20,5 +20,3 @@
     }
     @endif
 </script>
-
-<br><br><br>
