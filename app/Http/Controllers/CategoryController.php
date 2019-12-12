@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data['title'] = 'Categroy List';
-        $data['categories'] = Category::paginate(5);
+        $data['categories'] = Category::paginate(10);
         return view('admin.category.index',$data);
     }
 
@@ -51,11 +51,13 @@ class CategoryController extends Controller
         Category::create($category_data);
         //session()->flash('message','Category Created Successfully.');
 
+
         $notification = array(
             'message' => 'Category created successfully!',
             'alert-type' => 'success'
         );
 
+       // dd($notification);
         return redirect()->route('category.index')->with($notification);
     }
 
@@ -78,7 +80,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $data['title'] = 'Edit Category';
+        $data['categoryInfo'] = $category ;
+        return view('admin.category.edit',$data);
     }
 
     /**
@@ -90,7 +94,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+       $request->validate([
+
+           'name' => 'required',
+           'status' => 'required'
+
+       ]);
+
+       $category_data = $request->except('_token','_method');
+       $category_data['created_by'] = 1;
+       $category_data['updated_by'] = 1;
+       $category->update($category_data);
+       //session()->flash('message','Category Updated Successfully!');
+       return redirect()->route('category.index');
     }
 
     /**
@@ -101,6 +117,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('category.index');
     }
 }

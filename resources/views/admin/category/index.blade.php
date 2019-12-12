@@ -16,6 +16,27 @@
             </div>
 
 @endsection
+@if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+    case 'info':
+    toastr.info("{{ Session::get('message') }}");
+    break;
+
+    case 'warning':
+    toastr.warning("{{ Session::get('message') }}");
+    break;
+
+    case 'success':
+    toastr.success("{{ Session::get('message') }}");
+    break;
+
+    case 'error':
+    toastr.error("{{ Session::get('message') }}");
+    break;
+    }
+@endif
+
 @section('mainContent')
 
     <div class="row">
@@ -40,7 +61,14 @@
                     <td>
                         <span class="mb-2 mr-2 badge badge-pill  @if($category->status == 'active') badge-success @endif  @if($category->status == 'inactive') badge-danger @endif">{{$category->status}}</span>
                     </td>
-                    <td colspan="1">Edit | Delete</td>
+                    <td><a href="{{route('category.edit',$category->id)}}"><span class="mdi mdi-square-edit-outline">Edit</span></a>|
+
+                        <form action="{{route('category.destroy',$category->id)}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <a class="btn" onclick="return confirm('Are You Sure want to delete this category?')"><span style="color:red;" class="mdi mdi-delete">Delete</span></a>
+                        </form>
+                        </td>
                 </tr>
                 @endforeach
                 </tbody>
