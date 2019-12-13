@@ -7,13 +7,13 @@
                 </button>
                 <form style="display: inline-flex;">
 
-                <input type="text" name="search" id="search-input" class="form-control" placeholder="'search bar', 'chart' etc."
+                <input type="text" name="search" value="{{request()->search}}" id="search-input" class="form-control" placeholder="'search bar', 'chart' etc."
                       autofocus autocomplete="off" />
 
                     <select name="status" id="" class="form-control">
                         <option value="">Select Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
+                        <option @if(request()->status == 'active') selected @endif value="active">Active</option>
+                        <option @if(request()->status == 'inactive')selected @endif value="inactive">Inactive</option>
 
                     </select>
 
