@@ -46,7 +46,7 @@
                 <tbody>
                 @foreach($categories as $category)
                 <tr>
-                    <th scope="row">{{$category->id}}</th>
+                    <th scope="row">{{$serial++}}</th>
                     <td>{{$category->name}}</td>
 
                     <td>
@@ -82,7 +82,7 @@
             </table>
             <div class="row">
 
-                <div class=" col-sm-12 col-md-6 col-lg-4 offset-5 pagination border-rounded ">
+                <div class="pagination border-separted ">
                     {{$categories->render()}}
                 </div>
             </div>
