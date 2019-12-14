@@ -1,12 +1,9 @@
 @extends('layouts.master')
-@section('mainContent')
-
-    @extends('layouts.master')
 @section('searchContent')
     <div class="input-group" style="width: 150%;">
         <button type="button" name="addbrand" id="add-btn" class="btn btn-flat">
             <!--i style="color:#1b4b72;" class="mdi mdi-magnify"></i>-->
-            <a href="{{route('brand.create')}}"><span class="mdi mdi-table-plus text-sm-center"><h6>Add Brand</h6></span></a>
+            <a href="{{route('brand.create')}}"><span class="mdi mdi-table-plus text-sm-center"><h6>{{$title}}</h6></span></a>
         </button>
         <form style="display: inline-flex;">
 
@@ -31,10 +28,11 @@
     </div>
 
 @endsection
+
+
+
 @section('mainContent')
-
     <div class="row">
-
         <div class="col-sm-12 col-md-8 col-lg-8 offset-2">
             <div class="text-center"><h3>{{$title}}</h3></div>
             <table class="table table-responsive-sm table-bordered">
@@ -55,19 +53,19 @@
                         <td>
                             <span class="mb-2 mr-2 badge badge-pill  @if($brand->status == 'active') badge-success @endif  @if($brand->status == 'inactive') badge-danger @endif">{{$brand->status}}</span>
                         </td>
-                        <td class="text-center">@if($brand->deleted_at == null) <a class="btn btn-sm btn-secondary" href="{{route('brand.edit',$category->id)}}"><span class="mdi mdi-square-edit-outline">Edit</span></a>@endif
-                            @if($category->deleted_at == null)
+                        <td class="text-center">@if($brand->deleted_at == null) <a class="btn btn-sm btn-secondary" href="{{route('brand.edit',$brand->id)}}"><span class="mdi mdi-square-edit-outline">Edit</span></a>@endif
+                            @if($brand->deleted_at == null)
                                 <form style="display: inline;" action="{{route('brand.destroy',$brand->id)}}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Are You Sure want to delete this category?')"><span style="color:whitesmoke;" class="mdi mdi-delete">Delete</span></button>
+                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Are You Sure want to delete this brand?')"><span style="color:whitesmoke;" class="mdi mdi-delete">Delete</span></button>
                                 </form>
                             @endif
                             @if($brand->deleted_at != null)
                                 <form style="display: inline;" action="{{route('brand.restore',$brand->id)}}" method="post">
                                     @csrf
                                     @method('post')
-                                    <button class="btn btn-sm btn-warning" onclick="return confirm('Do you want to restore this category?')"><span style="color:whitesmoke;" class="mdi mdi-delete">Restore</span></button>
+                                    <button class="btn btn-sm btn-warning" onclick="return confirm('Do you want to restore this brand?')"><span style="color:whitesmoke;" class="mdi mdi-delete">Restore</span></button>
                                 </form>
                             @endif
 
@@ -75,7 +73,7 @@
                                 <form style="display: inline;" action="{{route('brand.delete',$brand->id)}}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Do you want to Delete this category permanently?')"><span style="color:darkred;" class="mdi mdi-delete">Permanent Delete</span></button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Do you want to Delete this brand permanently?')"><span style="color:darkred;" class="mdi mdi-delete">Permanent Delete</span></button>
                                 </form>
                             @endif
                         </td>
@@ -90,20 +88,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
     </div>
-
-
-
-
-
-
-@endsection
-
 
 @endsection

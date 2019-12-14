@@ -14,7 +14,6 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request->all());
         $data['title'] = 'Brand List';
         $brand = new Brand();
         $brand = $brand->withTrashed();
@@ -59,7 +58,20 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'name' => 'required',
+            'details' => 'required',
+            'status' => 'required'
+        ]);
+
+        $brand_data = $request->except('_token');
+        $brand_data['created_by'] = 1;
+        $brand_data['updated_by'] = 0;
+
+        Brand::create($brand_data);
+        //session()->flash('message','Brand Created Successfully!');
+        return redirect()->route('brand.index');
     }
 
     /**
@@ -81,7 +93,9 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        $data['title'] = 'Edit Brand';
+        $data['brandInfo'] = $brand ;
+        return view('admin.brand.edit',$data);
     }
 
     /**
@@ -93,7 +107,19 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+
+            'name' => 'required',
+            'status' => 'required'
+
+        ]);
+
+        $brand_data = $request->except('_token','_method');
+        $brand_data['created_by'] = 1;
+        $brand_data['updated_by'] = 1;
+        $brand->update($brand_data);
+        //session()->flash('message','brand Updated Successfully!');
+        return redirect()->route('brand.index');
     }
 
     /**
@@ -104,21 +130,22 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return redirect()->route('brand.index');
     }
 
 
     public function restore($id){
 
         Brand::where('id',$id)->onlyTrashed()->restore();
-        //session()->flash('message','Category Restored!');
+        //session()->flash('message','brand Restored!');
         return redirect()->route('brand.index');
     }
 
     public function delete($id){
-        Brand::where('id',$id)->onlyTrashed()->forceDelete();
-        //session()->flash('message','Category Deleted Permanently');
-        //echo "Category Deleted permanently";
+      Brand::where('id',$id)->onlyTrashed()->forceDelete();
+        //session()->flash('message','brand Deleted Permanently');
+        //echo "brand Deleted permanently";
         return redirect()->route('brand.index');
     }
 }

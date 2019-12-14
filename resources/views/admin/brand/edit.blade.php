@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('mainContent')
 
+
+
     <div class="row">
         <div class="col-lg-8 offset-2">
             <div class="card card-default">
@@ -8,21 +10,20 @@
                     <h3 class="text-center">{{$title}}</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('brand.store')}}" method="post">
+                    <form action="{{route('brand.update',$brandInfo->id)}}" method="post">
                         @csrf
-                        @method('POST')
+                        @method('put')
 
 
-                        <label class="text-dark font-weight-medium" for="">Brand Name</label>
+                        <label class="text-dark font-weight-medium" for="">Product Name</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
 														<span class="input-group-text">
 															<i class="mdi mdi-notice"></i>
                                                         </span>
                             </div>
-                            <input type="text" name="name" value="{{old('name')}}"  class="form-control" required placeholder="Enter Brand Name" aria-label="name">
+                            <input type="text" name="name" value="{{$brandInfo->name}}"  class="form-control" placeholder="Enter Product Name" aria-label="name">
                         </div>
-
 
                         <label class="text-dark font-weight-medium" for="">Brand Details</label>
                         <div class="input-group mb-2">
@@ -31,9 +32,10 @@
 															<i class="mdi mdi-edit"></i>
                                                         </span>
                             </div>
-                           <!-- <input type="text" name="details" value="{{old('details')}}"  class="form-control" placeholder="Enter Brand details" aria-label="details">-->
-                            <textarea name="details" required class="form-control" id="brand_details" cols="80" rows="5">{{old('details')}}</textarea>
+                        <!-- <input type="text" name="details" value="{{old('details')}}"  class="form-control" placeholder="Enter Brand details" aria-label="details">-->
+                            <textarea name="details" required class="form-control" id="brand_details" cols="80" rows="5">{{$brandInfo->details}}</textarea>
                         </div>
+
 
                         <label class="text-dark mb-2 mt-4 font-weight-medium d-inline-block mr-3" for="status">Status</label>
                         <ul class="list-unstyled list-inline">
@@ -41,9 +43,9 @@
                                 @php
                                     if(old("status")){
                                          $status = old('status');
-                                     }elseif(isset($brand_data)){
+                                     }elseif(isset($brandInfo)){
 
-                                     $status = $brand_data->status;
+                                     $status = $brandInfo->status;
                                  }else{
                                      $status = null;
                              }@endphp
@@ -61,7 +63,7 @@
                         </ul>
 
                         <div class="form-footer pt-5 border-top text-center">
-                            <button type="submit" class="btn btn-primary btn-default">Create Brand</button>
+                            <button type="submit" class="btn btn-primary btn-default">Update brand</button>
                         </div>
 
                     </form>
