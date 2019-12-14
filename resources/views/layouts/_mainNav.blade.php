@@ -78,6 +78,13 @@
                                 </a>
                             </li>
 
+                            <li >
+                                <a class="sidenav-item-link" href="{{route('brand.index')}}">
+                                    <span class="nav-text">Brand</span>
+
+                                </a>
+                            </li>
+
 
 
 
