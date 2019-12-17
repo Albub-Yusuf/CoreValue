@@ -57,6 +57,34 @@
                         </div>
                     </ul>
                 </li>
+                <!--Product Listings-->
+                <li  class="has-sub" >
+                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#Product"
+                       aria-expanded="false" aria-controls="Product">
+                        <i class="mdi mdi-chart-pie"></i>
+                        <span class="nav-text">Product</span> <b class="caret"></b>
+                    </a>
+                    <ul  class="collapse"  id="Product"
+                         data-parent="#sidebar-menu">
+                        <div class="sub-menu">
+
+
+
+                            <li >
+                                <a class="sidenav-item-link" href="{{route('product.index')}}">
+                                    <span class="nav-text">Product List</span>
+                                </a>
+                            </li>
+                            <li >
+                                <a class="sidenav-item-link" href="{{route('product.create')}}">
+                                    <span class="nav-text">Add Product</span>
+                                </a>
+                            </li>
+
+                        </div>
+                    </ul>
+                </li>
+
                 <!--Settings's-->
 
                 <li  class="has-sub" >
@@ -82,6 +110,12 @@
                                 <a class="sidenav-item-link" href="{{route('brand.index')}}">
                                     <span class="nav-text">Brand</span>
 
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <span class="nav-text">#</span>
                                 </a>
                             </li>
 
