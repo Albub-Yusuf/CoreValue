@@ -102,7 +102,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $data['title'] = 'Edit Product';
+        $data['product'] = $product;
+        $data['categories'] = Category::orderBy('name')->pluck('name','id');
+        $data['brands'] = Brand::orderBy('name')->pluck('name','id');
+
+        return view('admin.product.edit',$data);
     }
 
     /**
@@ -114,7 +119,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+
+            'category_id' => 'required',
+            'brand_id' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'status' => 'required'
+
+        ]);
+
+        //dd($request->all());
+
+        $product_data = $request->except('_token','_method');
+        $product_data['created_by'] = 1;
+        $product_data['updated_by'] = 1;
+        $product->update($product_data);
+        //session()->flash('message','Product Updated Successfully!!');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -125,20 +149,22 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        //session()->flash('message','Product Deleted Successfully');
+        return redirect()->route('product.index');
     }
 
     public function restore($id){
 
-       // Product::where('id',$id)->onlyTrashed()->restore();
+        Product::where('id',$id)->onlyTrashed()->restore();
         //session()->flash('message','product Restored!');
-        //return redirect()->route('product.index');
+        return redirect()->route('product.index');
     }
 
     public function delete($id){
-        //Product::where('id',$id)->onlyTrashed()->forceDelete();
+        Product::where('id',$id)->onlyTrashed()->forceDelete();
         //session()->flash('message','product Deleted Permanently');
         //echo "product Deleted permanently";
-        //return redirect()->route('product.index');
+        return redirect()->route('product.index');
     }
 }
