@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Str;
+@endphp
 @extends('layouts.master')
 @section('searchContent')
     <div class="input-group" style="width: 150%;">
@@ -38,7 +41,10 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">product Name</th>
+                    <th style="max-width: 50%;">Details</th>
                     <th scope="col">Status</th>
+                    <th>Price</th>
+                    <th>Stock</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -47,10 +53,15 @@
                     <tr>
                         <th scope="row">{{$serial++}}</th>
                         <td>{{$product->name}}</td>
+                        <td>{{Str::limit($product->description,50)}}
+                            <a href="{{route('product.show',$product->id)}}">Show Details</a>
+                        </td>
 
                         <td>
                             <span class="mb-2 mr-2 badge badge-pill  @if($product->status == 'active') badge-success @endif  @if($product->status == 'inactive') badge-danger @endif">{{$product->status}}</span>
                         </td>
+                        <td>{{$product->price}}</td>
+                        <td>{{$product->stock}}</td>
                         <td class="text-center">@if($product->deleted_at == null) <a class="btn btn-sm btn-secondary" href="{{route('product.edit',$product->id)}}"><span class="mdi mdi-square-edit-outline">Edit</span></a>@endif
                             @if($product->deleted_at == null)
                                 <form style="display: inline;" action="{{route('product.destroy',$product->id)}}" method="post">

@@ -1,8 +1,5 @@
 @extends('layouts.master')
 @section('mainContent')
-
-
-
     <div class="row">
         <div class="col-lg-8 offset-2">
             <div class="card card-default">
@@ -10,7 +7,7 @@
                     <h3 class="text-center">{{$title}}</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('product.update',$product->id)}}" method="post">
+                    <form action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -176,6 +173,25 @@
                                 </label>
                             </li>
                         </ul>
+
+                        <div class="col-md-12">
+                            <label class="text-dark font-weight-medium" for="image">Image</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+														<span class="input-group-text">
+															<i class="mdi mdi-image"></i>
+                                                        </span>
+
+                                </div>
+                                <input type="file" class="form-control" name="images[]" id="image" multiple>
+                            </div>
+                            @if( isset($product) && count($product->product_image))
+                                @foreach($product->product_image as $image)
+                                    <img src="{{URL::asset($image->file_path)}}" alt="" width="25%">
+                                    <a href="{{route('product.delete.image',$image->id )}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you want to delete this image?')">Delete</a>
+                                @endforeach
+                            @endif
+                        </div>
 
                         <div class="form-footer pt-5 border-top text-center">
                             <button type="submit" class="btn btn-primary btn-default">Edit Product</button>

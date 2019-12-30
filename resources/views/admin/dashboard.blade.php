@@ -30,7 +30,7 @@ Welcome to Core Value Enterprise
         <div class="card card-mini mb-4">
             <div class="card-body">
                 <h2 class="mb-1">Total Products</h2>
-                <p><a href="#">Products</a></p>
+                <p><a href="{{route('product.index')}}">Products</a></p>
                 <div class="chartjs-wrapper">
                     <canvas id="area-chart"></canvas>
                 </div>

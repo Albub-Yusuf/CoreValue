@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Category;
 use App\Product;
+use App\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -63,6 +65,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+       // dd($request->all());
         $request->validate([
 
             'category_id' => 'required',
@@ -71,14 +74,32 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required',
             'stock' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'images.*' => 'image'
 
         ]);
 
-        $product_data = $request->except('_token');
+        $product_data = $request->except('_token','images');
         $product_data['created_by'] = 1;
         $product_data['updated_by'] = 0;
-        Product::create($product_data);
+        $product = Product::create($product_data);
+
+        //image upload
+        if(count($request->images))
+        {
+            foreach($request->images as $image){
+                //dd($product_data);
+                $product_image['product_id'] = $product->id;
+                $image->move('images/products/',$image->getClientOriginalName());
+                $product_image['file_path'] = 'images/products/'.$image->getClientOriginalName();
+                ProductImage::create($product_image);
+            }
+
+        }
+
+
+
+
        //session()->flash('message','Product Created Successfully!!!');
        return redirect()->route('product.index');
     }
@@ -89,9 +110,16 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        //dd($product);
+        $data['title'] = 'Product Details';
+        $data['product'] = Product::with(['category','brand','product_image'])->findOrFail($id);
+        $data['categories'] = Category::orderBy('name')->pluck('name','id');
+        $data['brands'] = Brand::orderBy('name')->pluck('name','id');
+
+
+        return view('admin.product.show',$data);
     }
 
     /**
@@ -127,7 +155,8 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required',
             'stock' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'images.*' => 'image'
 
         ]);
 
@@ -137,6 +166,23 @@ class ProductController extends Controller
         $product_data['created_by'] = 1;
         $product_data['updated_by'] = 1;
         $product->update($product_data);
+
+        //image upload
+        if(count($request->images))
+        {
+            foreach($request->images as $image){
+                //dd($product_data);
+                $product_image['product_id'] = $product->id;
+                $image->move('images/products/',$image->getClientOriginalName());
+                $product_image['file_path'] = 'images/products/'.$image->getClientOriginalName();
+                ProductImage::create($product_image);
+            }
+
+        }
+
+
+
+
         //session()->flash('message','Product Updated Successfully!!');
         return redirect()->route('product.index');
     }
@@ -162,9 +208,31 @@ class ProductController extends Controller
     }
 
     public function delete($id){
-        Product::where('id',$id)->onlyTrashed()->forceDelete();
+        $product = Product::where('id',$id)->onlyTrashed()->with('product_image')->findOrFail($id);
+        if(count($product->product_image))
+        {
+            foreach($product->product_image as $image){
+
+                File::delete($image->file_path);
+                $image->delete();
+
+            }
+
+        }
+
+
+        $product->forceDelete();
         //session()->flash('message','product Deleted Permanently');
         //echo "product Deleted permanently";
         return redirect()->route('product.index');
+    }
+
+    public function delete_image($image_id){
+
+       $image = ProductImage::findOrFail($image_id);
+       //File::delete($image->file_path);
+        File::delete($image->file_path);
+       $image->delete();
+       return redirect()->back();
     }
 }
