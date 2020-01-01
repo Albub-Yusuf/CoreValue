@@ -65,8 +65,11 @@ class CategoryController extends Controller
             'status' => 'required'
         ]);
 
+        $user = auth()->user();
+
+
         $category_data = $request->except('_token');
-        $category_data['created_by'] = 1;
+        $category_data['created_by'] = $user->id;
         $category_data['updated_by'] = 0;
 
         Category::create($category_data);
@@ -122,9 +125,11 @@ class CategoryController extends Controller
 
        ]);
 
+        $user = auth()->user();
+
        $category_data = $request->except('_token','_method');
-       $category_data['created_by'] = 1;
-       $category_data['updated_by'] = 1;
+       $category_data['created_by'] = $user->id;
+       $category_data['updated_by'] = $user->id;
        $category->update($category_data);
        //session()->flash('message','Category Updated Successfully!');
        return redirect()->route('category.index');

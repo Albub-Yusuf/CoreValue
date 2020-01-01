@@ -65,8 +65,11 @@ class BrandController extends Controller
             'status' => 'required'
         ]);
 
+        $user = auth()->user();
+
+
         $brand_data = $request->except('_token');
-        $brand_data['created_by'] = 1;
+        $brand_data['created_by'] = $user->id;
         $brand_data['updated_by'] = 0;
 
         Brand::create($brand_data);
@@ -114,9 +117,11 @@ class BrandController extends Controller
 
         ]);
 
+        $user = auth()->user();
+
         $brand_data = $request->except('_token','_method');
-        $brand_data['created_by'] = 1;
-        $brand_data['updated_by'] = 1;
+        $brand_data['created_by'] = $user->id;
+        $brand_data['updated_by'] = $user->id;
         $brand->update($brand_data);
         //session()->flash('message','brand Updated Successfully!');
         return redirect()->route('brand.index');

@@ -1,14 +1,13 @@
 @php
-   /**
+
     $user = auth()->user();
-    //dd($user->file);
     if($user->file == NULL){
               $image = 'Backend/assets/img/user/placeholder.png';
                             }else{
                                 $image = $user->file;
                           }
 
-**/
+
 @endphp
 <nav class="navbar navbar-static-top navbar-expand-sm">
     <!-- Sidebar toggle button -->
@@ -67,18 +66,18 @@
             <!-- User Account -->
             <li class="dropdown user-menu">
                 <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <img src="{{asset('Backend/assets/img/user/placeholder.png')}}" class="user-image" alt="User Image" />
-                    <span class="d-none d-lg-inline-block">Admin</span>
+                <!-- <img src="{{asset('Backend/assets/img/user/user.png')}}" class="user-image" alt="User Image" />-->
+                    <img src="{{asset($image)}}" class="user-image" alt="User Image" />
+
+                    <span class="d-none d-lg-inline-block">{{$user->name}}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <!-- User image -->
                     <li class="dropdown-header">
-                        <!--<div class="d-inline-block">
-
-                        </div> -->
-                        <img src="{{asset('Backend/assets/img/user/placeholder.png')}}">
-                        <span class="d-none d-lg-inline-block">Admin</span>
-
+                        <img src="{{asset($image)}}" class="img-circle" alt="User Image" />
+                        <div class="d-inline-block">
+                            {{$user->name}} <small class="pt-1">{{$user->email}}</small>
+                        </div>
                     </li>
 
                     <li>
@@ -99,7 +98,7 @@
                     </li>
 
                     <li class="dropdown-footer">
-                        <a href="#"> <i class="mdi mdi-logout"></i> Log Out </a>
+                        <a href="{{route('logout')}}"> <i class="mdi mdi-logout"></i> Log Out </a>
                     </li>
                 </ul>
             </li>

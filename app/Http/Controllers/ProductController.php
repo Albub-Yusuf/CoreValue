@@ -79,8 +79,10 @@ class ProductController extends Controller
 
         ]);
 
+        $user = auth()->user();
+
         $product_data = $request->except('_token','images');
-        $product_data['created_by'] = 1;
+        $product_data['created_by'] = $user->id;
         $product_data['updated_by'] = 0;
         $product = Product::create($product_data);
 
@@ -160,11 +162,11 @@ class ProductController extends Controller
 
         ]);
 
-        //dd($request->all());
+        $user = auth()->user();
 
         $product_data = $request->except('_token','_method');
-        $product_data['created_by'] = 1;
-        $product_data['updated_by'] = 1;
+        $product_data['created_by'] = $user->id;
+        $product_data['updated_by'] = $user->id;
         $product->update($product_data);
 
         //image upload
