@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::resource('user','UserController');
+Route::post('user/{id}/restore','UserController@restore')->name('user.restore');
+Route::post('user/{id}/delete','UserController@delete')->name('user.delete');
+
+
 Route::get('dashboard','DashboardController@index')->name('admin.dashboard');
 Route::resource('category','CategoryController');
 Route::post('category/{id}/restore','CategoryController@restore')->name('category.restore');
