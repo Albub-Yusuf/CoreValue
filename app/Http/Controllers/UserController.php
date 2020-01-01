@@ -152,9 +152,7 @@ class UserController extends Controller
         $user = user::where('id',$id)->onlyTrashed()->findOrFail($id);
         $user->forceDelete();
         File::delete($user->file);
-
         //session()->flash('message','user Deleted Permanently');
-        //echo "user Deleted permanently";
         return redirect()->route('user.index');
     }
 }
