@@ -37,7 +37,7 @@
                     <td >
                         <div class="media">
                            <div class="col-md-1">
-                            {{$user->id}}
+                            {{$serial++}}
                         </div>
 
                             <div class="media-image mr-3 rounded-circle">
@@ -52,17 +52,34 @@
                             <div class="col-md-2">{{$user->phone}}</div>
                             <div class="col-md-2"><span @if($user->status == 'inactive')class="badge badge-danger"@endif class="badge badge-success">{{ucfirst($user->status)}}</span></div>
                             <div class="col-md-2">
+                                @if($user->deleted_at == null) <a class="btn btn-sm btn-secondary" href="{{route('user.edit',$user->id)}}"><span class="mdi mdi-square-edit-outline">Edit</span></a>@endif
+                                @if($user->deleted_at == null)
+                                    <form style="display: inline;" action="{{route('user.destroy',$user->id)}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Are You Sure want to delete this user?')"><span style="color:whitesmoke;" class="mdi mdi-delete">Delete</span></button>
+                                    </form>
+                                @endif
+                                @if($user->deleted_at != null)
+                                    <form style="display: inline;" action="{{route('user.restore',$user->id)}}" method="post">
+                                        @csrf
+                                        @method('post')
+                                        <button class="btn btn-sm btn-warning" onclick="return confirm('Do you want to restore this user?')"><span style="color:whitesmoke;" class="mdi mdi-delete">Restore</span></button>
+                                    </form>
+                                @endif
 
-                        <a  class="btn" href="{{route('user.edit',$user->id)}}"><span class="mdi mdi-square-edit-outline">Edit</span></a>
-                        <form action="{{route('user.destroy',$user->id)}}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <input type="hidden" value="{{$user->file}}">
-                            <button  onclick="return confirm('Wanna Delete the record?')" type="submit" class="btn" style=" display: inline-block;"><span style="color:red;" class="mdi mdi-delete"></span>Delete</button>
-                        </form>
-
-
-
+                                @if($user->deleted_at != null)
+                                    <form style="display: inline;" action="{{route('user.delete',$user->id)}}" method="post">
+                                        @csrf
+                                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Do you want to Delete this user permanently?')"><span style="color:darkred;" class="mdi mdi-delete">Permanent Delete</span></button>
+                                    </form>
+                                @endif
+                                
+                                
+                                
+                                
+                                
+                                
                         </div>
                         </div>
                     </td>

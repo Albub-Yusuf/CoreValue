@@ -17,8 +17,10 @@ class UserController extends Controller
     {
         $data['title']='Admin List';
         $user = new User();
-        $user = $user->all();
+        $user = $user->withTrashed();
+        $user = $user->orderBy('id','DESC')->paginate(10);
         $data['users'] = $user;
+        $data['serial'] = managePagination($user);
         return view('admin.user.index',$data);
     }
 
@@ -147,7 +149,12 @@ class UserController extends Controller
 
     public function delete($id){
 
-        User::where('id',$id)->forceDelete();
+        $user = user::where('id',$id)->onlyTrashed()->findOrFail($id);
+        $user->forceDelete();
+        File::delete($user->file);
+
+        //session()->flash('message','user Deleted Permanently');
+        //echo "user Deleted permanently";
         return redirect()->route('user.index');
     }
 }
