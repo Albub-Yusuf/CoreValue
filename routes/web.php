@@ -36,7 +36,10 @@ Route::middleware('auth')->group(function (){
 
 });
 
-Route::get('/','HomeController@index')->name('home');
+Route::get('/test','HomeController@index')->name('home');
+
+Route::get('/','FrontendController@index')->name('home2');
+
 
 
 

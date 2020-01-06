@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sublime project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('Frontend/styles/bootstrap4/bootstrap.min.css')}}">
     <link href="{{ asset('Frontend/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{ asset('Frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
@@ -14,11 +15,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('Frontend/plugins/OwlCarousel2-2.2.1/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('Frontend/styles/main_styles.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('Frontend/styles/responsive.css')}}">
+
     <!--Custom Product Grid CSS-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 
 
     <style>
@@ -66,7 +67,6 @@
 
 
     </style>
-
 
 </head>
 <body>
@@ -132,7 +132,7 @@
 
 <!-- Home -->
 
-<div class="home" style="height:500px; width:90%; margin: 0 auto;">
+<div class="home" style=" width:90%; margin: 0 auto;">
     <div class="home_slider_container">
 
         <!-- Home Slider -->
@@ -219,13 +219,14 @@
 <!-- Ads -->
 
 <!--Custom Product Grid Test-->
-    <div class="container">
+   <div class="container">
         <h3 class="h3">Product </h3>
         <div class="row">
             @yield('product_content')
         </div>
+       <hr>
     </div>
-    <hr>
+
 
 <!---->
 
@@ -252,32 +253,13 @@
 
 <!-- Icon Boxes -->
 <!-- Newsletter -->
-<!-- Footer -->
+    <!-- Footer -->
+    <br><br><br><br><br><br><br><br><br><br>
+    <div class="footer_overlay"></div>
+    <footer class="footer">
+       <!--Footer includes Here-->
+    </footer>
 
-<div class="footer_overlay"></div>
-<footer class="footer">
-    <div class="footer_background" style="background-image:url(Frontend/images/footer.jpg)"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-                    <div class="footer_logo"><a href="#"></a></div>
-                    <div class="copyright ml-auto mr-auto"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-                    <div class="footer_social ml-lg-auto">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
 </div>
 
 @include('layouts.frontend._scripts')
