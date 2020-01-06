@@ -46,7 +46,7 @@
                 </div><!-- End .col-lg-4 -->
             </div><!-- End .row -->
         </div><!-- End .container -->
-    </div><!-- End .home-top-container -->
+    </div> <!-- End .home-top-container -->
 
     <div class="info-boxes-container">
         <div class="container">
@@ -331,239 +331,39 @@
                         </div><!-- End .tab-pane -->
                         <div class="tab-pane fade" id="latest-products" role="tabpanel" aria-labelledby="latest-products-tab">
                             <div class="row row-sm">
+                                @if(isset($latest_products))
+                                @foreach($latest_products as $latest_product)
                                 <div class="col-6 col-md-4">
                                     <div class="product">
                                         <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{asset('Frontend2/assets/images/products/product-5.jpg')}}" alt="product">
+                                            <a href="{{route('product.details',$latest_product->id)}}" class="product-image">
+                                                <img src="{{asset(($latest_product->product_image[0])?$latest_product->product_image[0]->file_path:null)}}" alt="product">
                                             </a>
                                             <a href="ajax/product-quick-view.html" class="btn-quickview">Quick View</a>
                                         </figure>
                                         <div class="product-details">
                                             <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:80%"></span><!-- End .ratings -->
+                                                <div class="">
+                                                    <span class="" style="width:80%">{{$latest_product->category->name}}</span><!-- End .ratings -->
                                                 </div><!-- End .product-ratings -->
                                             </div><!-- End .product-container -->
                                             <h2 class="product-title">
-                                                <a href="product.html">Shoes</a>
+                                                <a href="{{route('product.details',$latest_product->id)}}">{{$latest_product->name}}</a>
                                             </h2>
                                             <div class="price-box">
-                                                <span class="product-price">$28.00</span>
+                                                <span class="product-price">BDT  {{$latest_product->price}}</span>
                                             </div><!-- End .price-box -->
 
                                             <div class="product-action">
-                                                <a href="#" class="paction add-wishlist" title="Add to Wishlist">
-                                                    <span>Add to Wishlist</span>
-                                                </a>
-
-                                                <a href="product.html" class="paction add-cart" title="Add to Cart">
+                                                <a href="{{route('product.details',$latest_product->id)}}" class="paction add-cart" title="Add to Cart">
                                                     <span>Add to Cart</span>
-                                                </a>
-
-                                                <a href="#" class="paction add-compare" title="Add to Compare">
-                                                    <span>Add to Compare</span>
                                                 </a>
                                             </div><!-- End .product-action -->
                                         </div><!-- End .product-details -->
                                     </div><!-- End .product -->
                                 </div><!-- End .col-md-4 -->
-
-                                <div class="col-6 col-md-4">
-                                    <div class="product">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{asset('Frontend2/assets/images/products/product-6.jpg')}}" alt="product">
-                                            </a>
-                                            <a href="ajax/product-quick-view.html" class="btn-quickview">Quick View</a>
-                                            <span class="product-label label-sale">-20%</span>
-                                            <span class="product-label label-hot">New</span>
-                                        </figure>
-                                        <div class="product-details">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:0%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <h2 class="product-title">
-                                                <a href="product.html">Training Shoes</a>
-                                            </h2>
-                                            <div class="price-box">
-                                                <span class="old-price">$60.00</span>
-                                                <span class="product-price">$48.00</span>
-                                            </div><!-- End .price-box -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="paction add-wishlist" title="Add to Wishlist">
-                                                    <span>Add to Wishlist</span>
-                                                </a>
-
-                                                <a href="product.html" class="paction add-cart" title="Add to Cart">
-                                                    <span>Add to Cart</span>
-                                                </a>
-
-                                                <a href="#" class="paction add-compare" title="Add to Compare">
-                                                    <span>Add to Compare</span>
-                                                </a>
-                                            </div><!-- End .product-action -->
-                                        </div><!-- End .product-details -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-md-4 -->
-
-                                <div class="col-6 col-md-4">
-                                    <div class="product">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{asset('Frontend2/assets/images/products/product-7.jpg')}}" alt="product">
-                                            </a>
-                                            <a href="ajax/product-quick-view.html" class="btn-quickview">Quick View</a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:60%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <h2 class="product-title">
-                                                <a href="product.html">Sports Shoes</a>
-                                            </h2>
-                                            <div class="price-box">
-                                                <span class="product-price">$850.00</span>
-                                            </div><!-- End .price-box -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="paction add-wishlist" title="Add to Wishlist">
-                                                    <span>Add to Wishlist</span>
-                                                </a>
-
-                                                <a href="product.html" class="paction add-cart" title="Add to Cart">
-                                                    <span>Add to Cart</span>
-                                                </a>
-
-                                                <a href="#" class="paction add-compare" title="Add to Compare">
-                                                    <span>Add to Compare</span>
-                                                </a>
-                                            </div><!-- End .product-action -->
-                                        </div><!-- End .product-details -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-md-4 -->
-
-                                <div class="col-6 col-md-4">
-                                    <div class="product">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{asset('Frontend2/assets/images/products/product-4.jpg')}}" alt="product">
-                                            </a>
-                                            <a href="ajax/product-quick-view.html" class="btn-quickview">Quick View</a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:40%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <h2 class="product-title">
-                                                <a href="product.html">Ratchet Belt</a>
-                                            </h2>
-                                            <div class="price-box">
-                                                <span class="product-price">$299.00</span>
-                                            </div><!-- End .price-box -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="paction add-wishlist" title="Add to Wishlist">
-                                                    <span>Add to Wishlist</span>
-                                                </a>
-
-                                                <a href="product.html" class="paction add-cart" title="Add to Cart">
-                                                    <span>Add to Cart</span>
-                                                </a>
-
-                                                <a href="#" class="paction add-compare" title="Add to Compare">
-                                                    <span>Add to Compare</span>
-                                                </a>
-                                            </div><!-- End .product-action -->
-                                        </div><!-- End .product-details -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-md-4 -->
-
-                                <div class="col-6 col-md-4">
-                                    <div class="product">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{asset('Frontend2/assets/images/products/product-2.jpg')}}" alt="product">
-                                            </a>
-                                            <a href="ajax/product-quick-view.html" class="btn-quickview">Quick View</a>
-                                            <span class="product-label label-sale">-20%</span>
-                                            <span class="product-label label-hot">New</span>
-                                        </figure>
-                                        <div class="product-details">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:0%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <h2 class="product-title">
-                                                <a href="product.html">Dress Shoes</a>
-                                            </h2>
-                                            <div class="price-box">
-                                                <span class="old-price">$60.00</span>
-                                                <span class="product-price">$48.00</span>
-                                            </div><!-- End .price-box -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="paction add-wishlist" title="Add to Wishlist">
-                                                    <span>Add to Wishlist</span>
-                                                </a>
-
-                                                <a href="product.html" class="paction add-cart" title="Add to Cart">
-                                                    <span>Add to Cart</span>
-                                                </a>
-
-                                                <a href="#" class="paction add-compare" title="Add to Compare">
-                                                    <span>Add to Compare</span>
-                                                </a>
-                                            </div><!-- End .product-action -->
-                                        </div><!-- End .product-details -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-md-4 -->
-
-                                <div class="col-6 col-md-4">
-                                    <div class="product">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{asset('Frontend2/assets/images/products/product-3.jpg')}}" alt="product">
-                                            </a>
-                                            <a href="ajax/product-quick-view.html" class="btn-quickview">Quick View</a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:60%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <h2 class="product-title">
-                                                <a href="product.html">Leather Belt</a>
-                                            </h2>
-                                            <div class="price-box">
-                                                <span class="product-price">$850.00</span>
-                                            </div><!-- End .price-box -->
-
-                                            <div class="product-action">
-                                                <a href="#" class="paction add-wishlist" title="Add to Wishlist">
-                                                    <span>Add to Wishlist</span>
-                                                </a>
-
-                                                <a href="product.html" class="paction add-cart" title="Add to Cart">
-                                                    <span>Add to Cart</span>
-                                                </a>
-
-                                                <a href="#" class="paction add-compare" title="Add to Compare">
-                                                    <span>Add to Compare</span>
-                                                </a>
-                                            </div><!-- End .product-action -->
-                                        </div><!-- End .product-details -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-md-4 -->
+                                    @endforeach
+                                    @endif
                             </div><!-- End .row -->
                         </div><!-- End .tab-pane -->
                     </div><!-- End .tab-content -->

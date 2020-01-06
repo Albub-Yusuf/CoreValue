@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function (){
 Route::get('/test','HomeController@index')->name('home');
 
 Route::get('/','FrontendController@index')->name('home2');
+Route::get('product/{id}','Front/ProductController@index')->name('product.details');
 
 
 
