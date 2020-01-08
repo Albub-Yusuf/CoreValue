@@ -80,6 +80,8 @@ class ProductController extends Controller
         ]);
 
         $user = auth()->user();
+        $product_image = $request->images;
+
 
         $product_data = $request->except('_token','images');
         $product_data['created_by'] = $user->id;
@@ -87,7 +89,7 @@ class ProductController extends Controller
         $product = Product::create($product_data);
 
         //image upload
-        if(count($request->images))
+        if($product_image!=NULL)
         {
             foreach($request->images as $image){
                 //dd($product_data);
@@ -97,6 +99,11 @@ class ProductController extends Controller
                 ProductImage::create($product_image);
             }
 
+        }
+
+        if($product_image ==NULL){
+            //session()->flash('message','Product Created Successfully!!!');
+            return redirect()->route('product.index');
         }
 
 
@@ -161,29 +168,38 @@ class ProductController extends Controller
             'images.*' => 'image'
 
         ]);
-
+        if(!$request->has(['is_featured'])){
+            $product_data['is_featured'] = 0;
+        }
         $user = auth()->user();
-
+        $product_images = $request->images;
+        //dd($product_images);
         $product_data = $request->except('_token','_method');
         $product_data['created_by'] = $user->id;
         $product_data['updated_by'] = $user->id;
         $product->update($product_data);
 
         //image upload
-        if(count($request->images))
+
+        if($product_images != NULL)
         {
             foreach($request->images as $image){
                 //dd($product_data);
                 $product_image['product_id'] = $product->id;
                 $image->move('images/products/',$image->getClientOriginalName());
                 $product_image['file_path'] = 'images/products/'.$image->getClientOriginalName();
+                //ProductImage::create($product_image);
                 ProductImage::create($product_image);
             }
 
         }
 
+        if($request->images == NULL){
 
+            //session()->flash('message','Product Updated Successfully!!');
+            return redirect()->route('product.index');
 
+        }
 
         //session()->flash('message','Product Updated Successfully!!');
         return redirect()->route('product.index');

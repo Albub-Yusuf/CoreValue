@@ -149,6 +149,25 @@
                             </div>
                         </div>
 
+                        <label class="text-dark mb-2 mt-4 font-weight-medium d-inline-block mr-3" for="is_featured">Is Featured</label>
+                        <ul class="list-unstyled list-inline">
+                            <li class="d-inline-block mr-3">
+                                @php
+                                    if(old("is_featured")){
+                                         $is_featured = old('is_featured');
+                                     }elseif(isset($Product_data)){
+
+                                     $is_featured = $Product_data->is_featured;
+                                 }else{
+                                     $is_featured = null;
+                             }@endphp
+                                <label for="yes" class="control control-checkbox">Yes
+                                    <input type="checkbox" id="yes" value="1" @if($is_featured == 1) checked @endif name="is_featured" checked="checked" />
+                                    <div class="control-indicator"></div>
+                                </label>
+                            </li>
+                        </ul>
+
                         <label class="text-dark mb-2 mt-4 font-weight-medium d-inline-block mr-3" for="status">Status</label>
                         <ul class="list-unstyled list-inline">
                             <li class="d-inline-block mr-3">
