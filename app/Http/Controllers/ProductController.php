@@ -143,6 +143,7 @@ class ProductController extends Controller
         $data['product'] = $product;
         $data['categories'] = Category::orderBy('name')->pluck('name','id');
         $data['brands'] = Brand::orderBy('name')->pluck('name','id');
+        //dd($data);
 
         return view('admin.product.edit',$data);
     }
@@ -168,13 +169,20 @@ class ProductController extends Controller
             'images.*' => 'image'
 
         ]);
-        if(!$request->has(['is_featured'])){
-            $product_data['is_featured'] = 0;
-        }
+
+
+
+
         $user = auth()->user();
         $product_images = $request->images;
         //dd($product_images);
         $product_data = $request->except('_token','_method');
+
+        if(!$request->has(['is_featured'])){
+            $product_data['is_featured'] = 0;
+        }
+       // dd($product_data);
+
         $product_data['created_by'] = $user->id;
         $product_data['updated_by'] = $user->id;
         $product->update($product_data);

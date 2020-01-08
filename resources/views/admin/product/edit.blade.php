@@ -155,14 +155,19 @@
                                 @php
                                     if(old("is_featured")){
                                          $is_featured = old('is_featured');
-                                     }elseif(isset($Product_data)){
+                                     }elseif(isset($product)){
 
-                                     $is_featured = $Product_data->is_featured;
+                                     $is_featured = $product->is_featured;
+
+
                                  }else{
                                      $is_featured = null;
-                             }@endphp
+                                     echo "getting zero";
+                             }
+
+                                @endphp
                                 <label for="yes" class="control control-checkbox">Yes
-                                    <input type="checkbox" id="yes" value="1" @if($is_featured == 1) checked @endif name="is_featured" checked="checked" />
+                                    <input type="checkbox"  name="is_featured" id="yes" value="1" @if($is_featured == 1) checked @endif />
                                     <div class="control-indicator"></div>
                                 </label>
                             </li>
@@ -174,9 +179,9 @@
                                 @php
                                     if(old("status")){
                                          $status = old('status');
-                                     }elseif(isset($Product_data)){
+                                     }elseif(isset($product)){
 
-                                     $status = $Product_data->status;
+                                     $status = $product->status;
                                  }else{
                                      $status = null;
                              }@endphp
