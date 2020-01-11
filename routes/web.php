@@ -14,7 +14,7 @@
 Route::get('admin/login','AdminLoginController@loginForm')->name('admin.login.form');
 Route::post('admin/login','AdminLoginController@login')->name('login');
 
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->prefix('admin')->group(function (){
 
     Route::resource('user','UserController');
     Route::post('user/{id}/restore','UserController@restore')->name('user.restore');

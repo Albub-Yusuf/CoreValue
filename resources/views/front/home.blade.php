@@ -337,7 +337,7 @@
                                     <div class="product">
                                         <figure class="product-image-container">
                                             <a href="{{route('product.details',$latest_product->id)}}" class="product-image">
-                                                <img src="{{asset(($latest_product->product_image[0])?$latest_product->product_image[0]->file_path:null)}}" alt="product">
+                                                <img  style="max-height: 250px; min-height: 250px;" src="{{asset(($latest_product->product_image[0])?$latest_product->product_image[0]->file_path:null)}}" alt="product">
                                             </a>
                                             <a href="ajax/product-quick-view.html" class="btn-quickview">Quick View</a>
                                         </figure>

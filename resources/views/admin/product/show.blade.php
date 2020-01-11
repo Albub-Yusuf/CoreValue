@@ -42,6 +42,10 @@
                     <td>{{ucfirst($product->status)}}</td>
                 </tr>
                 <tr>
+                    <th>Featured Product</th>
+                    <td>@if($product->is_featured == 1) Yes @elseif($product->is_featured == 0) No @endif</td>
+                </tr>
+                <tr>
                     <th>Product Details</th>
                     <td>{{$product->description}}</td>
                 </tr>
