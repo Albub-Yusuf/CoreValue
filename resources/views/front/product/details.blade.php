@@ -288,37 +288,9 @@
                         <div class="widget-body">
                             <div class="owl-carousel widget-featured-products">
                                 <div class="">
-                                    @if(isset($featured_products))
-                                        @foreach($featured_products as $product)
-
-                                    <div class="product product-sm">
-                                        <figure class="product-image-container">
-                                            <a href="{{route('product.details',$product->id)}}" class="product-image">
-                                                <img src="{{asset(isset($product->product_image[0])?$product->product_image[0]->file_path:'images/no_image.png')}}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <h2 class="product-title">
-                                                <a href="{{route('product.details',$product->id)}}">{{$product->name}}</a>
-                                            </h2>
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:80%"></span><!-- End .ratings -->
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <div class="price-box">
-                                                <span class="product-price">{{$product->price}}</span>
-                                            </div><!-- End .price-box -->
-                                        </div><!-- End .product-details -->
-                                    </div><!-- End .product -->
-                                        @endforeach
-                                    @endif
-
-                                </div><!-- End .featured-col -->
-
-                                <div class="">
                                     @if(isset($latest_products))
-                                        @foreach($latest_products as $lproduct)
+                                        @foreach($latest_products as $index=>$lproduct)
+                                            @if($index<=2)
 
                                             <div class="product product-sm">
                                                 <figure class="product-image-container">
@@ -340,6 +312,38 @@
                                                     </div><!-- End .price-box -->
                                                 </div><!-- End .product-details -->
                                             </div><!-- End .product -->
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+                                </div><!-- End .featured-col -->
+
+                                <div class="">
+                                    @if(isset($latest_products))
+                                        @foreach($latest_products as $index=>$lproduct)
+                                            @if($index >=3)
+
+                                            <div class="product product-sm">
+                                                <figure class="product-image-container">
+                                                    <a href="{{route('product.details',$lproduct->id)}}" class="product-image">
+                                                        <img src="{{asset(isset($lproduct->product_image[0])?$lproduct->product_image[0]->file_path:'images/no_image.png')}}" alt="product">
+                                                    </a>
+                                                </figure>
+                                                <div class="product-details">
+                                                    <h2 class="product-title">
+                                                        <a href="{{route('product.details',$lproduct->id)}}">{{$lproduct->name}}</a>
+                                                    </h2>
+                                                    <div class="ratings-container">
+                                                        <div class="product-ratings">
+                                                            <span class="ratings" style="width:80%"></span><!-- End .ratings -->
+                                                        </div><!-- End .product-ratings -->
+                                                    </div><!-- End .product-container -->
+                                                    <div class="price-box">
+                                                        <span class="product-price">{{$lproduct->price}}</span>
+                                                    </div><!-- End .price-box -->
+                                                </div><!-- End .product-details -->
+                                            </div><!-- End .product -->
+                                            @endif
                                         @endforeach
                                     @endif
 
