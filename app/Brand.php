@@ -14,7 +14,8 @@ class Brand extends Model
         'details',
         'created_by',
         'updated_by',
-        'status'
+        'status',
+        'logo'
 
     ];
 }

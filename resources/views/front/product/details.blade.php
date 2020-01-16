@@ -253,7 +253,7 @@
                 <div class="sidebar-wrapper">
                     <div class="widget widget-brand">
                         <a href="#">
-                            <img src="assets/images/product-brand.png" alt="{{$product->brand->name}}">
+                            <img src="{{asset(isset($product->brand->logo)?$product->brand->logo:'images/no_image.png')}}" alt="{{$product->brand->name}}">
                         </a>
                     </div><!-- End .widget -->
 

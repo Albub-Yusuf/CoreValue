@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
@@ -62,17 +63,35 @@ class BrandController extends Controller
 
             'name' => 'required',
             'details' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'logo' => 'image'
         ]);
 
         $user = auth()->user();
-
-
         $brand_data = $request->except('_token');
-        $brand_data['created_by'] = $user->id;
-        $brand_data['updated_by'] = 0;
+        //image upload
+        if($request->logo!=NULL)
+        {
+            //File Upload
+            if($request->hasFile('logo')){
+                $file = $request->file('logo');
+                $file->move('images/brands/',$file->getClientOriginalName());
+                $brand_data['logo'] = 'images/brands/'.$file->getClientOriginalName();
+            }
+            $brand_data['created_by'] = $user->id;
+            $brand_data['updated_by'] = 0;
 
-        Brand::create($brand_data);
+            Brand::create($brand_data);
+
+        }
+
+        if($request->logo == NULL){
+            $brand_data['created_by'] = $user->id;
+            $brand_data['updated_by'] = 0;
+            Brand::create($brand_data);
+            return redirect()->route('brand.index');
+        }
+        
         //session()->flash('message','Brand Created Successfully!');
         return redirect()->route('brand.index');
     }
@@ -113,16 +132,28 @@ class BrandController extends Controller
         $request->validate([
 
             'name' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+
 
         ]);
 
         $user = auth()->user();
 
         $brand_data = $request->except('_token','_method');
-        $brand_data['created_by'] = $user->id;
+
+        //File Upload
+            if($request->hasFile('logo')){
+                $file = $request->file('logo');
+                $file->move('images/brands/',$file->getClientOriginalName());
+                if($brand->logo !=null){
+                    File::delete($request->file);
+                }
+                $brand_data['logo'] = 'images/brands/'.$file->getClientOriginalName();
+            }
+
         $brand_data['updated_by'] = $user->id;
         $brand->update($brand_data);
+
         //session()->flash('message','brand Updated Successfully!');
         return redirect()->route('brand.index');
     }
@@ -136,6 +167,7 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         $brand->delete();
+       // File::delete($brand->logo);
         return redirect()->route('brand.index');
     }
 
@@ -150,7 +182,6 @@ class BrandController extends Controller
     public function delete($id){
       Brand::where('id',$id)->onlyTrashed()->forceDelete();
         //session()->flash('message','brand Deleted Permanently');
-        //echo "brand Deleted permanently";
         return redirect()->route('brand.index');
     }
 }

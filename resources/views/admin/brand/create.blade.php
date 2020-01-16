@@ -8,7 +8,7 @@
                     <h3 class="text-center">{{$title}}</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('brand.store')}}" method="post">
+                    <form action="{{route('brand.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
 
@@ -59,6 +59,19 @@
                                 </label>
                             </li>
                         </ul>
+
+                        <div class="col-md-12">
+                            <label class="text-dark font-weight-medium" for="logo">Brand Logo</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+														<span class="input-group-text">
+															<i class="mdi mdi-image"></i>
+                                                        </span>
+
+                                </div>
+                                <input type="file" class="form-control" name="logo" id="logo">
+                            </div>
+                        </div>
 
                         <div class="form-footer pt-5 border-top text-center">
                             <button type="submit" class="btn btn-primary btn-default">Create Brand</button>
