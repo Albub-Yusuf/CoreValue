@@ -1,4 +1,4 @@
-@extends('layouts.fronted2.master')
+@extends('layouts.frontend2.master')
 @section('content')
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">

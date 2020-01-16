@@ -3,12 +3,12 @@
 
 <!-- Mirrored from portotheme.com/html/porto/demo-8/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Nov 2018 10:34:18 GMT -->
 <head>
-@include('layouts.fronted2._head')
+@include('layouts.frontend2._head')
 </head>
 <body>
 <div class="page-wrapper">
     <header class="header">
-        @include('layouts.fronted2._header')
+        @include('layouts.frontend2._header')
     </header><!-- End .header -->
 
     <main class="main">
@@ -16,14 +16,14 @@
     </main><!-- End .main -->
 
     <footer class="footer">
-        @include('layouts.fronted2._footer')
+        @include('layouts.frontend2._footer')
     </footer><!-- End .footer -->
 </div><!-- End .page-wrapper -->
 
 <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
 
 <div class="mobile-menu-container">
-    @include('layouts.fronted2._mobileMenu')
+    @include('layouts.frontend2._mobileMenu')
 </div><!-- End .mobile-menu-container -->
 
 <div class="newsletter-popup mfp-hide" id="newsletter-popup-form" style="background-image: url({{asset('Frontend2/assets/images/newsletter_popup_bg.jpg')}})">
@@ -49,7 +49,7 @@
 </div><!-- End .newsletter-popup -->
 
 <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
-@include('layouts.fronted2._scripts')
+@include('layouts.frontend2._scripts')
 </body>
 
 <!-- Mirrored from portotheme.com/html/porto/demo-8/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Nov 2018 10:34:53 GMT -->
