@@ -64,7 +64,7 @@
 
                 <nav class="toolbox toolbox-pagination">
                     <div class="toolbox-item toolbox-show">
-                        <label>Showing 1–9 of {{$products->total()}} results</label>
+                        <label>Showing {{ $products->firstItem() }} to {{ $products->lastItem() }}  of {{$products->total()}} results</label>
                     </div><!-- End .toolbox-item -->
 
 

@@ -21,6 +21,7 @@ class ProductController extends Controller
         $products = $products->orderBy('id','DESC')->paginate(6);
         $data['products'] = $products;
        // dd($products->total());
+        //dd($data);
         //currentpage*total --- productperpage
         return view('front.product.index',$data);
     }
