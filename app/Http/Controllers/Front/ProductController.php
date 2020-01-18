@@ -34,4 +34,11 @@ class ProductController extends Controller
         return view('front.product.details',$data);
 
     }
+
+    public function cart()
+    {
+        $data['title'] = 'Cart';
+        $data['cart'] = session('cart');
+        return view('front.cart',$data);
+    }
 }
