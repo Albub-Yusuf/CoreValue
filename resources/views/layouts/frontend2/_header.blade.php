@@ -104,17 +104,22 @@
                 <span>Call us now</span>
                 <a href="tel:#"><strong>+000 1584 2578</strong></a>
             </div><!-- End .header-contact -->
-
+            @php
+                $count = 0;
+                  if(is_array(session('cart'))){
+                        $count = count(session('cart'));
+                  }
+               @endphp
             <div class="dropdown cart-dropdown">
                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                    <span class="cart-count"><span class="totalCartItemHeaderChild">{{ (session('cart'))!=null }}</span></span>
+                    <span class="cart-count"><span class="totalCartItemHeaderChild">{{ $count }}</span></span>
                 </a>
 
                 <div class="dropdown-menu" >
                     <div class="dropdownmenu-wrapper">
                                  <span class="headerCartDetails">
                            <div class="dropdown-cart-header">
-                            <span>{{ (session('cart'))!=null }} Items</span>
+                            <span>{{$count}} Items</span>
                            <a href="cart.html">View Cart</a>
 </div><!-- End .dropdown-cart-header -->
 <div class="dropdown-cart-products">
