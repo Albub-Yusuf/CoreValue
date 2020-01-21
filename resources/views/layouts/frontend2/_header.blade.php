@@ -120,7 +120,7 @@
                                  <span class="headerCartDetails">
                            <div class="dropdown-cart-header">
                             <span>{{$count}} Items</span>
-                           <a href="cart.html">View Cart</a>
+                           <a href="{{ route('cart') }}">View Cart</a>
 </div><!-- End .dropdown-cart-header -->
 <div class="dropdown-cart-products">
     @php
@@ -162,8 +162,8 @@
                         </span>
 
             <div class="dropdown-cart-action">
-                <a href="#" class="btn btn-block">Checkout</a>
-                <a href="{{ route('cart') }}" class="btn btn-block">Cart</a>
+                <a href="{{route('checkout')}}" class="btn btn-block btn-sm">Checkout</a>
+               <!-- <a href="{{ route('cart') }}" class="btn btn-block btn-sm">Cart</a>-->
             </div><!-- End .dropdown-cart-total -->
         </div><!-- End .dropdownmenu-wrapper -->
     </div><!-- End .dropdown-menu -->
@@ -177,7 +177,7 @@
 <div class="container">
 <nav class="main-nav">
 <ul class="menu sf-arrows">
-    <li class="active"><a href="index-2.html">Home</a></li>
+    <li class="active"><a href="{{route('home2')}}">Home</a></li>
     <li>
         <a href="category.html" class="sf-with-ul">Categories</a>
         <div class="megamenu megamenu-fixed-width">

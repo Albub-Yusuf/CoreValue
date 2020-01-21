@@ -42,8 +42,11 @@ Route::get('/','FrontendController@index')->name('home2');
 Route::get('products/{id?}','Front\ProductController@index')->name('front.product.index');
 Route::get('product/{id}','Front\ProductController@details')->name('product.details');
 Route::get('cart','Front\ProductController@cart')->name('cart');
-Route::get('ajax/add-to-cart/{product_id}','Front\AjaxController@addToCart')->name('ajax.addToCart');
 
+Route::post('customer/store','Front\CustomerController@store')->name('customer.store');
+Route::get('checkout','Front\CheckoutController@index')->name('checkout');
+Route::get('payment/{customer_id}/{order_id}','Front\CheckoutController@payment')->name('payment');
+Route::get('ajax/add-to-cart/{product_id}','Front\AjaxController@addToCart')->name('ajax.addToCart');
 
 Route::get('logout',function(){
     auth()->logout();

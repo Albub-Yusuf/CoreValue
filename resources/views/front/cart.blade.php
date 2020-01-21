@@ -25,41 +25,44 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $total = 0;
-                            @endphp
-                            @foreach($cart as $item)
-                                <tr class="product-row">
-                                    <td class="product-col">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{ asset($item['image']) }}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <h2 class="product-title">
-                                            <a href="{{ route('product.details',$item['product_id']) }}">{{ $item['name'] }}</a>
-                                        </h2>
-                                    </td>
-                                    <td>{{ $item['price'] }}</td>
-                                    <td>
-                                        <input class="vertical-quantity form-control" value="{{ $item['quantity'] }}" type="text">
-                                    </td>
-                                    @php $total += $item['price']*$item['quantity'] @endphp
-                                    <td>{{ $item['price']*$item['quantity'] }}</td>
-                                </tr>
-                                <tr class="product-action-row">
-                                    <td colspan="4" class="clearfix">
-                                        <div class="float-left">
-                                            <a href="#" class="btn-move">Move to Wishlist</a>
-                                        </div><!-- End .float-left -->
+                            @if($cart !=null)
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @foreach($cart as $item)
+                                    <tr class="product-row">
+                                        <td class="product-col">
+                                            <figure class="product-image-container">
+                                                <a href="product.html" class="product-image">
+                                                    <img src="{{ asset($item['image']) }}" alt="product">
+                                                </a>
+                                            </figure>
+                                            <h2 class="product-title">
+                                                <a href="{{ route('product.details',$item['product_id']) }}">{{ $item['name'] }}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ $item['price'] }}</td>
+                                        <td>
+                                            <input class="vertical-quantity form-control" value="{{ $item['quantity'] }}" type="text">
+                                        </td>
+                                        @php $total += $item['price']*$item['quantity'] @endphp
+                                        <td>{{ $item['price']*$item['quantity'] }}</td>
+                                    </tr>
+                                    <tr class="product-action-row">
+                                        <td colspan="4" class="clearfix">
+                                            <div class="float-left">
+                                                <a href="#" class="btn-move">Move to Wishlist</a>
+                                            </div><!-- End .float-left -->
 
-                                        <div class="float-right">
-                                            <a href="#" title="Edit product" class="btn-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
-                                            <a href="#" title="Remove product" class="btn-remove"><span class="sr-only">Remove</span></a>
-                                        </div><!-- End .float-right -->
-                                    </td>
-                                </tr>
-                            @endforeach
+                                            <div class="float-right">
+                                                <a href="#" title="Edit product" class="btn-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
+                                                <a href="#" title="Remove product" class="btn-remove"><span class="sr-only">Remove</span></a>
+                                            </div><!-- End .float-right -->
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
 
                             </tbody>
 
@@ -152,7 +155,9 @@
                             <tfoot>
                             <tr>
                                 <td>Order Total</td>
+                                @if($cart !=null)
                                 <td>{{ $total }}</td>
+                                    @endif
                             </tr>
                             </tfoot>
                         </table>
