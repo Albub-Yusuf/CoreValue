@@ -17,4 +17,10 @@ class Order extends Model
         'payment_type'
 
     ];
+
+    public function order_detail(){
+
+        return $this->hasMany(OrderDetail::class);
+    }
+
 }

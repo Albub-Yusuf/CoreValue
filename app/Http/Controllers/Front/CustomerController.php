@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Front;
 
 use App\Customer;
 use App\Http\Controllers\Controller;
+use App\Mail\OrderPlaceMail;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -70,14 +72,23 @@ class CustomerController extends Controller
                     }
                 }
             }
-            
+
             Order::findOrFail($order_id)->update(['total_price'=>$total]);
             DB::commit();
+
+            $customer = Customer::findOrFail($customer_id);
+            //dd($customer);
+            Mail::to($customer->email)->send(new OrderPlaceMail($order_id));
+            //dd('try block success');
+
+            //dd('try');
+
             return redirect()->route('payment',[$customer_id,$order_id]);
         }catch (\Exception $exception){
 
             DB::rollBack();
             Log::error('CustomerController@store Message - '.$exception->getMessage());
+           // dd('catch');
             return redirect()->back();
         }
 

@@ -110,7 +110,7 @@
                             <div class="pl-1 text-danger">{{$message}}</div>
                             @enderror
 
-                            <button type="submit" class="btn btn-primary float-right">NEXT</button>
+                            <button type="submit" class="btn btn-primary float-right">Place Order</button>
 
                         </form>
                     </li>
